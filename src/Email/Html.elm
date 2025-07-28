@@ -4,7 +4,7 @@ module Email.Html exposing
     , toHtml, toString
     )
 
-{-| Only html tags that are supported by major all email clients are listed here.
+{-| Only HTML tags that are supported by all major email clients are listed here.
 If you need something not that's included (and potentially not universally supported) use [`node`](#node).
 
 These sources were used to determine what should be included:
@@ -12,7 +12,7 @@ These sources were used to determine what should be included:
 <https://www.pinpointe.com/blog/email-campaign-html-and-css-support>
 <https://www.caniemail.com/>
 
-Open an issue on github if something is missing or incorrectly included.
+[Open an issue on GitHub](https://github.com/MartinSStewart/elm-email/issues/new) if something is missing or incorrectly included.
 
 
 # Html tags
@@ -41,20 +41,20 @@ type alias Html =
     Internal.Html
 
 
-{-| An HTML attribute
+{-| An HTML attribute.
 -}
 type alias Attribute =
     Internal.Attribute
 
 
-{-| Convert [`Email.Html.Html`](#Html) into normal a [`Html`](https://package.elm-lang.org/packages/elm/html/latest/Html). Useful if you want to preview your email content.
+{-| Convert [`Email.Html.Html`](#Html) into a normal [`Html`](https://package.elm-lang.org/packages/elm/html/latest/Html). Useful if you want to preview your email content.
 -}
 toHtml : Html -> Html.Html msg
 toHtml =
     Internal.toHtml
 
 
-{-| Convert [`Email.Html.Html`](#Html) into normal html text.
+{-| Convert [`Email.Html.Html`](#Html) into normal HTML text.
 
     Email.Html.toString myHtml --> "<div>Hello!</div>"
 
@@ -64,7 +64,7 @@ toString html =
     Internal.toString html |> Tuple.first
 
 
-{-| This allows you to create html tags not included in this module (at the risk of it not rendering correctly in some email clients).
+{-| This allows you to create HTML tags not included in this module (at the risk of it not rendering correctly in some email clients).
 -}
 node : String -> List Attribute -> List Html -> Html
 node =
@@ -233,7 +233,7 @@ inlinePngImg content =
 
 
 {-| If you want to embed a jpg image within the email body, use this function.
-The normal approach of using a base64 string as the image src doesn't always with emails.
+The normal approach of using a base64 string as the image src doesn't always work with emails.
 -}
 inlineJpgImg : Bytes -> List Attribute -> List Html -> Html
 inlineJpgImg content =
@@ -244,7 +244,7 @@ inlineJpgImg content =
 
 
 {-| If you want to embed a gif within the email body, use this function.
-The normal approach of using a base64 string as the image src doesn't always with emails.
+The normal approach of using a base64 string as the image src doesn't always work with emails.
 
 Note that [some email clients](https://www.caniemail.com/search/?s=gif) won't animate the gif.
 
