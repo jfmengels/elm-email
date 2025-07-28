@@ -8,7 +8,7 @@ module Postmark exposing
 
 # Sending emails
 
-@docs apiKey, ApiKey, sendEmail, sendEmails, sendEmailTask, sendEmailsTask, Email, EmailBody, MessageStream, PostmarkError_, SendEmailError, SendEmailsError
+@docs ApiKey, apiKey, sendEmail, sendEmails, sendEmailTask, sendEmailsTask, Email, EmailBody, MessageStream, PostmarkError_, SendEmailError, SendEmailsError
 
 
 # Email attachments
@@ -36,7 +36,7 @@ endpoint =
     "https://api.postmarkapp.com"
 
 
-{-| A SendGrid API key. In order to send an email you must have one of these (see the readme for how to get one).
+{-| A Postmark API key. In order to send an email you must have one of these (see the readme for how to get one).
 -}
 type ApiKey
     = ApiKey String
@@ -49,15 +49,12 @@ apiKey apiKey_ =
     ApiKey apiKey_
 
 
-{-|
+{-| What kind of email content are you sending? Just plain text (TextBody), HTML (HtmlBody), or both (HtmlAndTextBody).
+If you do send HTML, it's recommended to also send a plain text version for accessibility and it might reduce the odds of the email getting blocked by a spam filter.
 
-    What kind of email content are you sending? Just plain text (TextBody), HTML (HtmlBody), or both (HtmlAndTextBody).
-    If you do send HTML, it's recommended to also send a plain text version for accessibility and it might reduce the odds of the email getting blocked by a spam filter.
-
-    Note that email clients are quite limited in what html features are supported!
-    To avoid accidentally using html that's unsupported by some email clients, the `Email.Html` and `Email.Html.Attributes` modules only define tags and attributes with universal support.
-    You can still use `Email.Html.node` and `Email.Html.Attributes.attribute` if you want something that might not be universally supported though.
-
+Note that email clients are quite limited in what html features are supported!
+To avoid accidentally using html that's unsupported by some email clients, the `Email.Html` and `Email.Html.Attributes` modules only define tags and attributes with universal support.
+You can still use `Email.Html.node` and `Email.Html.Attributes.attribute` if you want something that might not be universally supported though.
 -}
 type EmailBody
     = HtmlBody Email.Html.Html
@@ -154,7 +151,7 @@ type SendEmailsError
     | BadUrl_ String
 
 
-{-| Send an email (but as a `Task` instead of a `Cmd`)
+{-| Send an email (but as a `Task` instead of a `Cmd`).
 
     import EmailAddress exposing (EmailAddress)
     import List.Nonempty exposing (Nonempty)
@@ -263,7 +260,7 @@ encodeEmail d =
         )
 
 
-{-| Task version of `sendEmails`
+{-| Task version of `sendEmails`.
 -}
 sendEmailsTask : ApiKey -> Nonempty Email -> Task SendEmailsError ()
 sendEmailsTask (ApiKey token) d =
@@ -277,7 +274,7 @@ sendEmailsTask (ApiKey token) d =
         }
 
 
-{-| Send an email
+{-| Send an email.
 
     import EmailAddress exposing (EmailAddress)
     import List.Nonempty
@@ -331,7 +328,7 @@ emailToString address =
             ++ ">"
 
 
-{-| Error message you can potentially get from Postmark
+{-| Error message you can potentially get from Postmark.
 -}
 type alias PostmarkError_ =
     { errorCode : Int
